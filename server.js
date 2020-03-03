@@ -1,11 +1,23 @@
 const express = require('express');
 const app = express();
+const methods = require('./db/pgconfig');
 
-// if you are using mongo/mongoose uncomment this line
-// const Message = require('./db/Message');
+// here is where we will define the request paths -AUSTIN
 
-// if you are using postgres, uncomment this line
-// const pool = require('./db/pgconfig');
+// create a message path: /api/messages
+// Retrieve a list of all messages (output should be an array of objects): /api/messages
+app.get('/api/messages', function(req, res) {
+ methods.returnAllMessages()
+ .then(data => {
+  res.send(data)
+ })
+})
+
+app.post('/api/messages' function(req, res) {
+  methods.addMessage()
+})
+
+
 
 app.use((req,res,next) => {
   res.status(404).send('That route does not exist');

@@ -12,6 +12,9 @@ CREATE DATABASE messages;
 
 CREATE TABLE messages (
 -- build your schema here
+id SERIAL,
+name TEXT, 
+message TEXT
 );
 
 -- Seed your data with a collection of insert statements
