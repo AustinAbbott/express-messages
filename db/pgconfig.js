@@ -3,20 +3,16 @@ const pool = new Pool({
   database: 'messages'
 });
 
-
 function returnAllMessages() {
   return pool.query('SELECT * FROM messages')
-  .then(data => {
-    return data.rows;
-  })
-}
+  .then(data => data.rows)
+};
 
-function addMessage(name, message) {
-  pool.query('INSERT INTO messages(name, message) VALUES(`${name}`,`${message}`')
-  .then(data => {
-    return 'Success!'
-  })
-}
+function addMessage(message) {
+  let values = [message.name, message.message];
+
+  return pool.query('INSERT INTO messages(name, message) VALUES($1, $2)', values)
+};
 // the actual code for the methods goes here
 
 
